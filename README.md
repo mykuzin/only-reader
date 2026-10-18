@@ -10,8 +10,10 @@ A quiet, installable e-book reader (PWA) with one-tap AI translation of any sele
 - **Translation:** select text → **Translate**. Words get a translation, transcription, part of speech, alternatives
   and a short note on what they mean *in this sentence*; passages get a natural translation. Translated words are
   underlined in the book (tap to see them again) and collected in **Words**, exportable as CSV for Anki.
-- **Providers:** Claude, any OpenAI-compatible API (OpenAI, OpenRouter, DeepSeek, Groq, Ollama…), Gemini.
-  Your API key is stored only on the device; requests go straight from the browser to the provider.
+- **Providers:** Claude, OpenRouter (one key for hundreds of models), Gemini, or any OpenAI-compatible API
+  (OpenAI, DeepSeek, Groq, Ollama…). Requests go straight from the browser to the provider.
+- **Account (optional):** sign in with Google to keep settings and API keys on every device. They are stored in
+  the Drive `appDataFolder` — a hidden folder in the user's own Drive that only this app can read. No server.
 - **Offline:** the app is cached by a service worker; books live in IndexedDB on the device.
 - **Android:** install to the home screen, then use **Share → Only Reader** from a file manager or Telegram to add books.
 
@@ -29,9 +31,34 @@ needs HTTPS. Use a real deployment or `chrome://inspect` port forwarding to `loc
 
 ## Deploy
 
-`dist/` is a static site. Any HTTPS static host works: Cloudflare Pages, Netlify, GitHub Pages, Vercel.
-Build command `npm run build`, output directory `dist`. For a sub-path (e.g. GitHub Pages project sites)
-set Vite's `base` in `vite.config.ts`.
+Live at **https://mykuzin.github.io/only-reader/**. To publish the current commit:
+
+```sh
+npm run deploy     # builds with base /only-reader/ and force-pushes dist/ to the gh-pages branch
+```
+
+`dist/` is a plain static site, so any HTTPS host works; set `BASE_PATH` when it is served from a sub-path.
+
+## Google sign-in setup (one time)
+
+Sign-in stays hidden until a Google OAuth client ID is configured:
+
+1. Open https://console.cloud.google.com/ and create a project (e.g. "Only Reader").
+2. **APIs & Services → Library →** enable **Google Drive API**.
+3. **Google Auth Platform → Branding:** app name "Only Reader", your email as support and developer contact.
+   **Audience:** External. While in *Testing*, add the Google accounts allowed to sign in as test users
+   (or press *Publish app*; the `drive.appdata` scope needs no Google verification).
+4. **Data Access → Add scopes:** `openid`, `.../auth/userinfo.email`, `.../auth/userinfo.profile`,
+   `.../auth/drive.appdata`.
+5. **Clients → Create client → Web application.** Authorized JavaScript origins:
+   `https://mykuzin.github.io`, plus `http://localhost:5173` and `http://localhost:4173` for development.
+   No redirect URIs are needed.
+6. Put the client ID in `.env` (it is public, not a secret) and redeploy:
+
+   ```sh
+   echo VITE_GOOGLE_CLIENT_ID=1234567890-abc.apps.googleusercontent.com > .env
+   npm run deploy
+   ```
 
 ## Structure
 
