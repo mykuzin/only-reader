@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#f7f5f0"/>
+  <!-- ears -->
+  <path d="M118 78 L214 150 L150 214 Z" fill="#d9692e"/>
+  <path d="M394 78 L298 150 L362 214 Z" fill="#d9692e"/>
+  <path d="M136 112 L190 154 L156 188 Z" fill="#3b2a22"/>
+  <path d="M376 112 L322 154 L356 188 Z" fill="#3b2a22"/>
+  <!-- head -->
+  <path d="M256 138 C318 138 372 168 390 222 C402 258 392 292 362 318 L256 404 L150 318 C120 292 110 258 122 222 C140 168 194 138 256 138 Z" fill="#e8783a"/>
+  <!-- white cheeks and muzzle -->
+  <path d="M126 262 C168 262 214 280 256 318 C298 280 344 262 386 262 C382 288 370 304 362 318 L256 404 L150 318 C142 304 130 288 126 262 Z" fill="#fff4e8"/>
+  <!-- nose -->
+  <path d="M238 380 C246 372 266 372 274 380 C270 394 262 402 256 404 C250 402 242 394 238 380 Z" fill="#2b201b"/>
+  <!-- glasses -->
+  <g fill="rgba(255,255,255,.22)" stroke="#1f1e1c" stroke-width="11">
+    <circle cx="204" cy="238" r="38"/>
+    <circle cx="308" cy="238" r="38"/>
+  </g>
+  <path d="M240 232 Q256 220 272 232" fill="none" stroke="#1f1e1c" stroke-width="10" stroke-linecap="round"/>
+  <!-- eyes: content, half-closed -->
+  <path d="M188 244 Q204 230 220 244" fill="none" stroke="#1f1e1c" stroke-width="9" stroke-linecap="round"/>
+  <path d="M292 244 Q308 230 324 244" fill="none" stroke="#1f1e1c" stroke-width="9" stroke-linecap="round"/>
+  <!-- open book -->
+  <path d="M256 418 C214 392 160 386 104 392 L104 448 C160 442 214 448 256 474 C298 448 352 442 408 448 L408 392 C352 386 298 392 256 418 Z" fill="#2f5d8a"/>
+  <path d="M256 418 V474" stroke="#f7f5f0" stroke-width="6"/>
+</svg>
