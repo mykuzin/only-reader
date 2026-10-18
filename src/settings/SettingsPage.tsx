@@ -4,8 +4,6 @@ import { listModels, PROVIDER_LABELS, translate, TranslateError } from '../lib/t
 import { goBack } from '../router'
 import { Icon } from '../ui/icons'
 import { Segmented, Toggle } from '../reader/TypographyPanel'
-import { AccountCard } from './AccountCard'
-import { accountsEnabled, useAccount } from '../lib/account'
 
 const QUICK_LANGS = [
   { value: 'Ukrainian', label: 'Українська' },
@@ -24,7 +22,6 @@ const KEY_HELP: Record<ProviderId, { url: string; hint: string }> = {
 
 export const SettingsPage = () => {
   const s = useSettings()
-  const account = useAccount()
   const p = s.providers[s.provider]
   const [showKey, setShowKey] = useState(false)
   const [models, setModels] = useState<string[]>([])
@@ -81,16 +78,11 @@ export const SettingsPage = () => {
       </header>
 
       <main class="page-body">
-        {accountsEnabled && <AccountCard />}
-
         <section class="group">
           <h2>Translation</h2>
           <p class="group-hint">
-            Select a word or passage while reading and tap Translate. The selection and its sentence go
-            straight to the provider you choose.{' '}
-            {account.profile
-              ? 'Your keys are saved to your Google account.'
-              : 'Your key is stored on this device only.'}
+            Select a word or passage while reading and tap Translate. Your key is stored on this device only;
+            the selection and its sentence go straight to the provider you choose.
           </p>
 
           <div class="field stacked">

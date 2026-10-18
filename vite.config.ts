@@ -7,13 +7,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 // Only applied to production builds: Vite's dev server injects inline scripts.
 const csp = [
   "default-src 'self'",
-  // accounts.google.com: Google sign-in (Identity Services script and popup).
-  "script-src 'self' 'wasm-unsafe-eval' https://accounts.google.com",
-  "style-src 'self' 'unsafe-inline' blob: https://accounts.google.com",
-  "img-src 'self' blob: data: https://*.googleusercontent.com",
+  "script-src 'self' 'wasm-unsafe-eval'",
+  "style-src 'self' 'unsafe-inline' blob:",
+  "img-src 'self' blob: data:",
   "font-src 'self' blob: data:",
   "media-src 'self' blob: data:",
-  "frame-src 'self' blob: https://accounts.google.com",
+  "frame-src 'self' blob:",
   "worker-src 'self' blob:",
   // LLM endpoints are user-configurable (incl. local servers), so allow any.
   "connect-src 'self' blob: data: https: http:",

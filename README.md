@@ -12,8 +12,8 @@ A quiet, installable e-book reader (PWA) with one-tap AI translation of any sele
   underlined in the book (tap to see them again) and collected in **Words**, exportable as CSV for Anki.
 - **Providers:** Claude, OpenRouter (one key for hundreds of models), Gemini, or any OpenAI-compatible API
   (OpenAI, DeepSeek, Groq, Ollama…). Requests go straight from the browser to the provider.
-- **Account (optional):** sign in with Google to keep settings and API keys on every device. They are stored in
-  the Drive `appDataFolder` — a hidden folder in the user's own Drive that only this app can read. No server.
+- **Private by design:** no accounts and no server. Books, keys, words and progress live in the browser on each
+  device; every user who opens the site gets their own empty library.
 - **Offline:** the app is cached by a service worker; books live in IndexedDB on the device.
 - **Android:** install to the home screen, then use **Share → Only Reader** from a file manager or Telegram to add books.
 
@@ -38,27 +38,6 @@ npm run deploy     # builds with base /only-reader/ and force-pushes dist/ to th
 ```
 
 `dist/` is a plain static site, so any HTTPS host works; set `BASE_PATH` when it is served from a sub-path.
-
-## Google sign-in setup (one time)
-
-Sign-in stays hidden until a Google OAuth client ID is configured:
-
-1. Open https://console.cloud.google.com/ and create a project (e.g. "Only Reader").
-2. **APIs & Services → Library →** enable **Google Drive API**.
-3. **Google Auth Platform → Branding:** app name "Only Reader", your email as support and developer contact.
-   **Audience:** External. While in *Testing*, add the Google accounts allowed to sign in as test users
-   (or press *Publish app*; the `drive.appdata` scope needs no Google verification).
-4. **Data Access → Add scopes:** `openid`, `.../auth/userinfo.email`, `.../auth/userinfo.profile`,
-   `.../auth/drive.appdata`.
-5. **Clients → Create client → Web application.** Authorized JavaScript origins:
-   `https://mykuzin.github.io`, plus `http://localhost:5173` and `http://localhost:4173` for development.
-   No redirect URIs are needed.
-6. Put the client ID in `.env` (it is public, not a secret) and redeploy:
-
-   ```sh
-   echo VITE_GOOGLE_CLIENT_ID=1234567890-abc.apps.googleusercontent.com > .env
-   npm run deploy
-   ```
 
 ## Structure
 

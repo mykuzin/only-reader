@@ -4,7 +4,6 @@ import { ACCEPT, importFile, requestPersistentStorage } from '../lib/books'
 import { navigate } from '../router'
 import { Icon } from '../ui/icons'
 import { Sheet } from '../ui/Sheet'
-import { useAccount } from '../lib/account'
 
 type Toast = { text: string; id: number }
 
@@ -23,7 +22,6 @@ export const Library = () => {
   const [menu, setMenu] = useState<BookRecord | null>(null)
   const [dragging, setDragging] = useState(false)
   const input = useRef<HTMLInputElement>(null)
-  const account = useAccount()
 
   const refresh = () => listBooks().then(setBooks)
 
@@ -93,11 +91,7 @@ export const Library = () => {
         <h1>Library</h1>
         <div class="actions">
           <button class="icon-btn" onClick={() => navigate('/words')} aria-label="Words"><Icon name="words" /></button>
-          <button class="icon-btn" onClick={() => navigate('/settings')} aria-label="Settings">
-            {account.profile?.picture
-              ? <img class="header-avatar" src={account.profile.picture} alt="" referrerpolicy="no-referrer" />
-              : <Icon name="settings" />}
-          </button>
+          <button class="icon-btn" onClick={() => navigate('/settings')} aria-label="Settings"><Icon name="settings" /></button>
         </div>
       </header>
 

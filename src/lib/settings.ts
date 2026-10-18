@@ -20,8 +20,6 @@ export type Settings = {
   hyphenate: boolean
   flow: 'paginated' | 'scrolled'
   fxlZoom: 'fit-page' | 'fit-width'
-  /** Last local edit, used to reconcile with the copy in the user's Google Drive. */
-  updatedAt: number
 }
 
 export const PROVIDER_DEFAULTS: Record<ProviderId, ProviderConfig> = {
@@ -45,7 +43,6 @@ const DEFAULTS: Settings = {
   hyphenate: true,
   flow: 'paginated',
   fxlZoom: 'fit-page',
-  updatedAt: 0,
 }
 
 const KEY = 'only-reader:settings'
@@ -73,14 +70,10 @@ const listeners = new Set<(s: Settings) => void>()
 
 export const getSettings = () => current
 
-/** Notified on edits made in this app (not on settings pulled from sync). */
-export const localEdits = new Set<() => void>()
-
-export const setSettings = (patch: Partial<Settings>, opts: { fromSync?: boolean } = {}) => {
-  current = { ...current, ...patch, updatedAt: opts.fromSync ? patch.updatedAt ?? current.updatedAt : Date.now() }
+export const setSettings = (patch: Partial<Settings>) => {
+  current = { ...current, ...patch }
   try { localStorage.setItem(KEY, JSON.stringify(current)) } catch { /* storage full or blocked */ }
   for (const l of listeners) l(current)
-  if (!opts.fromSync) for (const l of localEdits) l()
 }
 
 export const setProviderConfig = (id: ProviderId, patch: Partial<ProviderConfig>) =>

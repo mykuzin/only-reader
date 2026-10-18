@@ -415,17 +415,4 @@ mark { background: color-mix(in srgb, var(--mark) 35%, transparent); color: inhe
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
-/* Account */
-.google-btn { background: var(--surface); border: 1px solid var(--line); color: var(--fg); }
-.account-row { display: flex; align-items: center; gap: 14px; margin: 6px 0 12px; }
-.avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; }
-.avatar.initial { display: grid; place-items: center; background: var(--accent); color: var(--accent-fg); font-weight: 600; font-size: 18px; }
-.account-text { display: flex; flex-direction: column; min-width: 0; }
-.account-text .name { font-weight: 500; }
-.account-text .email { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
-.account-actions { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin: 0 -10px 4px 0; }
-.sync-status { font-size: 13px; color: var(--muted); margin-right: auto; }
-.sync-status.pending { color: var(--mark); }
-.account-error { color: var(--danger); font-size: 14px; margin: 10px 0 0; }
 .key-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; margin-left: 8px; vertical-align: middle; opacity: .7; }
-.header-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
